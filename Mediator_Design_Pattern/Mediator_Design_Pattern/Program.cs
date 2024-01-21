@@ -1,6 +1,7 @@
+using DemoLibrary;
+using DemoLibrary.DataAccess;
 using Mediator_Design_Pattern.Data;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
+using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
+
+//added this part
+builder.Services.AddSingleton<IDataAccess, DemoDataAccess>();
+builder.Services.AddMediatR(typeof(DemoLibraryMediatREntryPoint).Assembly);
 
 var app = builder.Build();
 
